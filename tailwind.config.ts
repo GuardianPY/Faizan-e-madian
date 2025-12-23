@@ -57,6 +57,21 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        mosque: {
+          green: "hsl(var(--mosque-green))",
+          "green-light": "hsl(var(--mosque-green-light))",
+          gold: "hsl(var(--mosque-gold))",
+          "gold-light": "hsl(var(--mosque-gold-light))",
+          cream: "hsl(var(--mosque-cream))",
+          brown: "hsl(var(--mosque-brown))",
+          teal: "hsl(var(--mosque-teal))",
+        },
+      },
+      fontFamily: {
+        arabic: ["Amiri", "serif"],
+        urdu: ["Noto Nastaliq Urdu", "serif"],
+        display: ["Playfair Display", "serif"],
+        sans: ["Poppins", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,10 +95,23 @@ export default {
             height: "0",
           },
         },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        shimmer: "shimmer 2s linear infinite",
+        "fade-in": "fade-in 0.6s ease-out forwards",
+      },
+      backgroundImage: {
+        "islamic-pattern": "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23166534' fill-opacity='0.05'%3E%3Cpath d='M30 0l30 30-30 30L0 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
       },
     },
   },
