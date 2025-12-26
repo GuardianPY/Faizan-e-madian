@@ -14,16 +14,186 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      announcements: {
+        Row: {
+          content_en: string
+          content_ur: string | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          title_en: string
+          title_ur: string | null
+          type: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          content_en: string
+          content_ur?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          title_en: string
+          title_ur?: string | null
+          type?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          content_en?: string
+          content_ur?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          title_en?: string
+          title_ur?: string | null
+          type?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      educational_resources: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          description_en: string | null
+          description_ur: string | null
+          id: string
+          is_active: boolean | null
+          resource_url: string | null
+          title_en: string
+          title_ur: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          description_en?: string | null
+          description_ur?: string | null
+          id?: string
+          is_active?: boolean | null
+          resource_url?: string | null
+          title_en: string
+          title_ur?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          description_en?: string | null
+          description_ur?: string | null
+          id?: string
+          is_active?: boolean | null
+          resource_url?: string | null
+          title_en?: string
+          title_ur?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      events: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          description_en: string | null
+          description_ur: string | null
+          event_date: string
+          event_time: string | null
+          id: string
+          is_active: boolean | null
+          location: string | null
+          title_en: string
+          title_ur: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          description_en?: string | null
+          description_ur?: string | null
+          event_date: string
+          event_time?: string | null
+          id?: string
+          is_active?: boolean | null
+          location?: string | null
+          title_en: string
+          title_ur?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          description_en?: string | null
+          description_ur?: string | null
+          event_date?: string
+          event_time?: string | null
+          id?: string
+          is_active?: boolean | null
+          location?: string | null
+          title_en?: string
+          title_ur?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      prayer_times: {
+        Row: {
+          id: string
+          iqamah_time: string
+          is_active: boolean | null
+          prayer_name: string
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          iqamah_time: string
+          is_active?: boolean | null
+          prayer_name: string
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          iqamah_time?: string
+          is_active?: boolean | null
+          prayer_name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +320,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
