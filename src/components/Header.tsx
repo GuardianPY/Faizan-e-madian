@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { Menu, X, Moon, Sun, Globe } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Menu, X, Moon, Sun, Globe, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const { language, setLanguage, t } = useLanguage();
-
+  const navigate = useNavigate();
   const toggleTheme = () => {
     setIsDark(!isDark);
     document.documentElement.classList.toggle('dark');
@@ -71,6 +71,17 @@ const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-2">
+            {/* Admin Link */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate('/auth')}
+              className="rounded-full"
+              title="Admin Portal"
+            >
+              <Settings className="h-5 w-5" />
+            </Button>
+
             {/* Language Toggle */}
             <Button
               variant="ghost"
