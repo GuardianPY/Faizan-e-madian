@@ -5,7 +5,6 @@ import PrayerTimes from '@/components/PrayerTimes';
 import About from '@/components/About';
 import Announcements from '@/components/Announcements';
 import Events from '@/components/Events';
-import Education from '@/components/Education';
 import Donations from '@/components/Donations';
 import Tasbeeh from '@/components/Tasbeeh';
 import Contact from '@/components/Contact';
@@ -24,7 +23,6 @@ const Index = () => {
           <About />
           <Announcements />
           <Events />
-          <Education />
           <Donations />
           <Tasbeeh />
           <VisitorInfo />
