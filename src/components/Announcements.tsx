@@ -1,4 +1,4 @@
-import { Bell, Calendar, AlertCircle, Info } from 'lucide-react';
+import { Bell, Calendar, AlertCircle, Info, Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -36,11 +36,11 @@ const announcements = [
 const getTypeConfig = (type: string) => {
   switch (type) {
     case 'important':
-      return { icon: AlertCircle, color: 'bg-destructive text-destructive-foreground', label: 'Important' };
+      return { icon: AlertCircle, color: 'text-red-600', label: 'Important' };
     case 'event':
-      return { icon: Calendar, color: 'bg-primary text-primary-foreground', label: 'Event' };
+      return { icon: Calendar, color: 'text-blue-600', label: 'Event' };
     default:
-      return { icon: Info, color: 'bg-muted text-muted-foreground', label: 'Info' };
+      return { icon: Info, color: 'text-emerald-600', label: 'Info' };
   }
 };
 
@@ -64,7 +64,7 @@ const Announcements = () => {
         </div>
 
         {/* Announcements Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {announcements.map((announcement, index) => {
             const config = getTypeConfig(announcement.type);
             const IconComponent = config.icon;
@@ -72,25 +72,43 @@ const Announcements = () => {
             return (
               <Card
                 key={announcement.id}
-                className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden animate-fade-in border-l-4"
+                style={{ 
+                  animationDelay: `${index * 0.1}s`,
+                  borderLeftColor: config.color === 'text-red-600' ? '#dc2626' : 
+                                   config.color === 'text-blue-600' ? '#2563eb' : '#059669'
+                }}
               >
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <Badge className={config.color}>
-                      <IconComponent className="w-3 h-3 mr-1" />
+                <CardContent className="p-6 relative">
+                  {/* Background Pattern */}
+                  <div className="absolute top-0 right-0 w-32 h-32 opacity-5 rounded-full -translate-y-1/2 translate-x-1/2 bg-gradient-to-br from-primary to-accent" />
+                  
+                  {/* Type Badge */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className={`w-10 h-10 rounded-xl ${config.color.replace('text-', 'bg-')}/10 flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                      <IconComponent className={`w-5 h-5 ${config.color}`} />
+                    </div>
+                    <Badge variant="outline" className={`${config.color} border-current`}>
                       {config.label}
                     </Badge>
-                    <span className="text-xs text-muted-foreground">{announcement.date}</span>
                   </div>
-                  <CardTitle className={`text-lg mt-3 ${language === 'ur' ? 'font-urdu text-right' : ''}`}>
+
+                  {/* Date */}
+                  <p className="text-sm text-muted-foreground mb-3 flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    {announcement.date}
+                  </p>
+
+                  {/* Content */}
+                  <h3 className={`font-bold text-xl mb-3 text-foreground ${language === 'ur' ? 'font-urdu' : ''}`}>
                     {language === 'ur' ? announcement.titleUr : announcement.titleEn}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className={language === 'ur' ? 'font-urdu text-right' : ''}>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  </h3>
+                  <p className={`text-muted-foreground leading-relaxed ${language === 'ur' ? 'font-urdu' : ''}`}>
                     {language === 'ur' ? announcement.contentUr : announcement.contentEn}
                   </p>
+                  
+                  {/* Decorative Line */}
+                  <div className={`mt-6 h-1 w-16 ${config.color.replace('text-', 'bg-')} rounded-full group-hover:w-full transition-all duration-500`} />
                 </CardContent>
               </Card>
             );
