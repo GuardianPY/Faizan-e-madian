@@ -11,6 +11,8 @@ import Contact from '@/components/Contact';
 import Newsletter from '@/components/Newsletter';
 import VisitorInfo from '@/components/VisitorInfo';
 import Footer from '@/components/Footer';
+import Gallery from '@/components/Gallery';
+import Services from '@/components/Services';
 
 const Index = () => {
   return (
@@ -21,8 +23,10 @@ const Index = () => {
           <Hero />
           <PrayerTimes />
           <About />
+          <Services />
           <Announcements />
           <Events />
+          <Gallery />
           <Donations />
           <Tasbeeh />
           <VisitorInfo />

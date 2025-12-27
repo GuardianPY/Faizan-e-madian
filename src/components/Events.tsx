@@ -69,38 +69,48 @@ const Events = () => {
         </div>
 
         {/* Events Grid */}
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event, index) => {
             const IconComponent = event.icon;
             return (
               <Card
                 key={event.id}
-                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden border-l-4 border-l-primary"
+                className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
-                    <div className="w-12 h-12 rounded-xl gradient-islamic flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <IconComponent className="w-6 h-6 text-primary-foreground" />
+                <CardContent className="p-0">
+                  {/* Event Header with Gradient */}
+                  <div className="gradient-islamic p-6 text-primary-foreground relative overflow-hidden">
+                    <div className="absolute inset-0 islamic-pattern opacity-20" />
+                    <div className="relative z-10 flex items-start justify-between">
+                      <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all">
+                        <IconComponent className="w-7 h-7 text-white" />
+                      </div>
+                      <Badge className="bg-accent/20 text-white border-white/30">
+                        {event.category}
+                      </Badge>
                     </div>
-                    <Badge variant="secondary">{event.category}</Badge>
                   </div>
-                  <CardTitle className={`text-xl mt-4 ${language === 'ur' ? 'font-urdu text-right' : ''}`}>
-                    {language === 'ur' ? event.titleUr : event.titleEn}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className={language === 'ur' ? 'font-urdu text-right' : ''}>
-                  <p className="text-muted-foreground mb-4">
-                    {language === 'ur' ? event.descUr : event.descEn}
-                  </p>
-                  <div className="flex items-center gap-4 text-sm">
-                    <div className="flex items-center gap-1 text-primary">
-                      <Calendar className="w-4 h-4" />
-                      <span>{event.day}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-muted-foreground">
-                      <Clock className="w-4 h-4" />
-                      <span>{event.time}</span>
+
+                  {/* Event Details */}
+                  <div className="p-6">
+                    <h3 className={`font-bold text-xl mb-3 text-foreground ${language === 'ur' ? 'font-urdu' : ''}`}>
+                      {language === 'ur' ? event.titleUr : event.titleEn}
+                    </h3>
+                    <p className={`text-muted-foreground mb-4 leading-relaxed ${language === 'ur' ? 'font-urdu' : ''}`}>
+                      {language === 'ur' ? event.descUr : event.descEn}
+                    </p>
+
+                    {/* Date and Time */}
+                    <div className="flex flex-col gap-2 pt-4 border-t">
+                      <div className="flex items-center gap-2 text-sm">
+                        <Calendar className="w-4 h-4 text-primary" />
+                        <span className="font-medium text-foreground">{event.day}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <Clock className="w-4 h-4 text-primary" />
+                        <span className="text-muted-foreground">{event.time}</span>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
